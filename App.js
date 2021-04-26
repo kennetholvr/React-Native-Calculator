@@ -90,11 +90,11 @@ export default class App extends Component {
         });
         break;
       case "=":
-        let formatOperator = operator == "x" ? "*" : operator;
+        let formatOperator = (operator == "x") ? "*" : (operator == '/') ? '/' : operator
         let result = eval(firstValue + formatOperator + secondValue);
         this.setState({
-          displayValue: result % 1 === 0 ? result : result.toFixed(2),
-          firstValue: result % 1 === 0 ? result : result.toFixed(2),
+          displayValue: result,
+          firstValue: result,
           secondValue: "",
           operator: null,
           nextValue: false,
@@ -119,8 +119,18 @@ export default class App extends Component {
         this.setState({
           displayValue: dot !== "." ? displayValue + input : displayValue,
         });
+        if (!nextValue) {
+          this.setState({
+            firstValue: firstValue + input
+          })
+        } else {
+          this.setState({
+            secondValue: secondValue + input
+          })
+        }
         break;
     }
+    console.log(displayValue)
   };
 
   render() {

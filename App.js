@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 import NumberButton from "./components/numberButton";
 
 const buttons = [
-  ["CLEAR", "DEL"],
+  ["Clear", "Del"],
   ["7", "8", "9", "/"],
   ["4", "5", "6", "x"],
   ["1", "2", "3", "-"],
@@ -100,18 +100,19 @@ export default class App extends Component {
           nextValue: false,
         });
         break;
-      case "CLEAR":
+      case "Clear":
         this.setState({
           operator: null,
           displayValue: "0",
         });
         break;
-      case "DEL":
+      case "Del":
         let string = displayValue.toString();
         let length = string.length;
+        let deletedString = string.substr(0, string.length - 1)
         this.setState({
-          displayValue: length == 1 ? "0" : displayValue.slice(0, -1),
-          firstValue: length == 1 ? "" : displayValue.slice(0, -1),
+          displayValue: length == 1 ? "0" : deletedString,
+          firstValue: length == 1 ? "" : deletedString,
         });
         break;
       case ".":

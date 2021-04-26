@@ -93,8 +93,8 @@ export default class App extends Component {
         let formatOperator = (operator == "x") ? "*" : (operator == '/') ? '/' : operator
         let result = eval(firstValue + formatOperator + secondValue);
         this.setState({
-          displayValue: result,
-          firstValue: result,
+          displayValue: result % 1 === 0 ? result : result.toFixed(2),
+          firstValue: result % 1 === 0 ? result : result.toFixed(2),
           secondValue: "",
           operator: null,
           nextValue: false,

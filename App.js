@@ -2,14 +2,39 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import NumberButton from './components/numberButton.js'
+
+const buttons = [
+  ['Clear', 'Del'],
+  [7 ,8 ,9, '%'],
+  [4 ,5 ,6, '*'],
+  [1 ,2 ,3, '-'],
+  [0 , '.', '=', '+'],
+
+]
+
 export default function App() {
+  
+  const renderButtons = () => {
+    let layouts = buttons.map((buttonRows, index) => {
+      let rowItem = buttonRows.map((buttonItems, buttonIndex) => {
+        return <NumberButton 
+        value={buttonItems}
+        handleOnPress={() => {}}
+        key={'btn-' + buttonIndex }/>
+      })
+      return <View style={styles.inputRow} key={'row-' + index}>{rowItem}</View>
+    })
+    return layouts
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.resultContainer}>
         <Text style={styles.resultText}>0</Text>
       </View>
       <View style={styles.buttonContainer}>
-
+            {renderButtons()}
       </View>
     </View>
   );
@@ -35,4 +60,8 @@ const styles = StyleSheet.create({
     padding: 20,
     textAlign: 'right'
   },
+  inputRow:{
+    flex: 1,
+    flexDirection: 'row'
+  }
 });
